@@ -1,0 +1,23 @@
+{
+  "_comment": "Add your own CC0 / CC-BY assets here. fetch_assets.py downloads them and writes CREDITS.md. Use {KEY} for a URL that needs an API key.",
+  "assets": [
+    {
+      "name": "amb_hvac",
+      "folder": "amb",
+      "url": "https://freesound.org/data/previews/000/000000_1123456-lq.mp3",
+      "author": "replace with the real author",
+      "licence": "CC0",
+      "page": "https://freesound.org/",
+      "key": "FREESOUND_KEY"
+    },
+    {
+      "name": "sfx_drawer_open",
+      "folder": "sfx",
+      "url": "https://freesound.org/data/previews/000/000000_1123456-lq.mp3",
+      "author": "replace with the real author",
+      "licence": "CC0",
+      "page": "https://freesound.org/",
+      "key": "FREESOUND_KEY"
+    }
+  ]
+}
