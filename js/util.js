@@ -119,4 +119,4 @@ W7.util = (function() {
         now: now, wait: wait, tween: tween,
         clock: clock, escapeHtml: escapeHtml
     };
-});
+})();
