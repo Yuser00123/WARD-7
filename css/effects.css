@@ -1,0 +1,139 @@
+.overlay-stack{
+    position: absolute;
+    pointer-events: none;
+    inset: 0;
+    overflow: hidden;
+}
+
+.grain{
+    position: absolute;
+    inset: -60%;
+    opacity: .13;
+    width: 220%;
+    height: 220%;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grainShift .5s steps(5) infinite;
+}
+
+@keyframes grainShift{
+    0%   { transform: translate(0, 0); }
+    20%  { transform: translate(-3%, 2%); }
+    40%  { transform: translate(2%, -3%); }
+    60%  { transform: translate(-2%, -2%); }
+    80%  { transform: translate(3%, 1%); }
+    100% { transform: translate(0, 0); }
+}
+
+.scanlines{
+    position: absolute;
+    inset: 0;
+    opacity: .55;
+    mix-blend-mode: multiply;
+    background: repeating-linear-gradient(180deg,
+    rgba(0, 0, 0, .30) 0px,
+    rgba(0, 0, 0, .30) 1px,
+    rgba(0, 0, 0, 0)  2px,
+    rgba(0, 0, 0, 0)  4px);
+}
+
+.tracking{
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 26%;
+    background: linear-gradient(180deg,
+    transparent,
+    rgba(201, 227, 214, .045) 45%,
+    rgba(201, 227, 214, .07) 50%,
+    rgba(201, 227, 214, .045) 55%,
+    transparent);
+    animation: track 7.5s linear infinite;
+    opacity: 0;
+}
+
+.tracking.is-on{
+    opacity: 1;
+}
+
+@keyframes track{
+    from {top: -30%;}
+    to {top: 100%;}
+}
+
+.vignette{
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%,
+    transparent 34%,
+    rgba(0, 0, 0, .45) 72%,
+    rgba(0, 0, 0, .88) 100%);
+}
+
+.flash{
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background: #fff;
+}
+
+.flash.is-on{
+    animation: flashHit .5s steps(3);
+}
+
+@keyframes flashHit{
+    0%   { opacity: .92; }
+    35%  { opacity: .25; }
+    55%  { opacity: .7; }
+    100% { opacity: 0; }
+}
+
+.stage.is-glitch .scene{
+    animation: glitch .22s steps(2);
+}
+
+@keyframes glitch{
+    0%   { transform: translateX(0); filter: hue-rotate(0deg); }
+    33%  { transform: translateX(-9px); filter: hue-rotate(-18deg) saturate(2); }
+    66%  { transform: translateX(7px);  filter: hue-rotate(22deg) saturate(2); }
+    100% { transform: translateX(0);  filter: none; }
+}
+
+.stage.is-dread .vignette{
+    background: radial-gradient(ellipse at 50% 50%,
+    transparent 24%,
+    rgba(90, 0, 10, .38) 66%,
+    rgba(30, 0, 4, .92) 100%);
+}
+
+.stage.is-blackout .scene{
+    filter: brightness(0);
+}
+
+.stage.is-blackout .overlay-stack{
+    opacity: 0;
+}
+
+.stage{
+    transition: filter .9s ease;
+}
+
+@media (prefers-reduced-motion: reduce){
+    .grain,
+    .tracking,
+    .title-bg::after{animation: none !important;}
+    .stage.is-glitch .scene{animation: none !important;}
+}
+
+body.reduce-flash .flash.is-on{
+    animation: flashSoft .5s ease-out;
+}
+
+body.reduce-flash .scanlines{
+    opacity: .3;
+}
+
+@keyframes flashSoft{
+    0% {opacity: .3;}
+    100% {opacity: 0;}
+}
